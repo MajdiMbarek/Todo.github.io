@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+    {% block main %}
+
+        <div class="container">
+            <h1>To-Do List</h1>
+            <!-- Form for adding new tasks -->
+            <form method="POST" action="/">
+                <input type="hidden" name="action" value="add">
+                <input type="text" name="task" placeholder="Add a new task" required autocomplete="off">
+                <button type="submit">Add</button>
+            </form>
+            <ul id="task_id">
+                {% for task in tasks %}
+                <li class="task">
+                    <span>{{ task["task"] }}</span>
+                    <form method="POST" action="/">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}
